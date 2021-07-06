@@ -47,13 +47,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
      * |  N/A  |  N/A  |  N/A  |       |  N/A  |       ␣       |   0   |  ⌘ ←  |   ⇟   |   ⇞   |  ⌘ →  |
      *  -----------------------------------------------------------------------------------------------
-     *  TODO: Implement ⌘⇥
      */
     [_SPC] = LAYOUT_planck_1x2uC(
-        KC_GRV, _______,     LGUI(KC_W), LGUI(KC_E), LGUI(KC_R), LGUI(KC_T), _______, KC_7,    KC_8,          KC_9,    _______, LGUI(KC_BSPC),
-        KC_ATAB, LGUI(KC_A), LGUI(KC_S), LGUI(KC_D), LGUI(KC_F), LGUI(KC_G), _______, KC_4,    KC_5,          KC_6,    KC_0,    LGUI(KC_ENT),
-        KC_LSFT, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_B), _______, KC_1,    KC_2,          KC_3,    KC_0,    KC_F16,
-        _______, _______,    _______,    KC_TRNS,    _______,    KC_SPC,              KC_0,    LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
+        KC_GRV, _______,     LGUI(KC_W), LGUI(KC_E), LGUI(KC_R), LGUI(KC_T), XXXXXXX, KC_7,    KC_8,          KC_9,    XXXXXXX, LGUI(KC_BSPC),
+        KC_ATAB, LGUI(KC_A), LGUI(KC_S), LGUI(KC_D), LGUI(KC_F), LGUI(KC_G), XXXXXXX, KC_4,    KC_5,          KC_6,    KC_0,    LGUI(KC_ENT),
+        KC_LSFT, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_B), XXXXXXX, KC_1,    KC_2,          KC_3,    KC_0,    _______,
+        _______, _______,    _______,    _______,    XXXXXXX,    KC_SPC,              KC_0,    LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
     ),
     /*  Lower
      *  -----------------------------------------------------------------------------------------------
@@ -68,9 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_LOWER] = LAYOUT_planck_1x2uC(
         KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,       KC_LPRN, KC_RPRN, LGUI(KC_BSPC),
-        _______, KC_MINS, KC_EQL,  KC_PLUS, _______, _______, _______, _______, KC_LCBR,       KC_RCBR, KC_COLN, LGUI(KC_ENT),
-        KC_LSFT, KC_UNDS, KC_BSLS, KC_PIPE, _______, _______, _______, _______, KC_LBRC,       KC_RBRC, KC_SCLN, KC_F16,
-        _______, _______, _______, _______, KC_TRNS, KC_SPC,           LAISE,   LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
+        XXXXXXX, KC_MINS, KC_EQL,  KC_PLUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR,       KC_RCBR, KC_COLN, LGUI(KC_ENT),
+        KC_LSFT, KC_UNDS, KC_BSLS, KC_PIPE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC,       KC_RBRC, KC_SCLN, _______,
+        _______, _______, _______, _______, XXXXXXX, KC_SPC,           LAISE,   LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
     ),
     /*  Raise
      *  -----------------------------------------------------------------------------------------------
@@ -86,9 +85,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_RAISE] = LAYOUT_planck_1x2uC(
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,          KC_9,    KC_0,    LGUI(KC_BSPC),
-        _______, KC_MINS, KC_EQL,  KC_PLUS, _______, _______, _______, _______, KC_LCBR,       KC_RCBR, KC_COLN, LGUI(KC_ENT),
-        KC_LSFT, KC_UNDS, KC_BSLS, KC_PIPE, _______, _______, _______, _______, KC_LBRC,       KC_RBRC, KC_SCLN, KC_F16,
-        KC_MRWD, KC_VOLD, KC_VOLU, KC_MFFD, LAISE,   KC_MPLY,          KC_TRNS, LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
+        XXXXXXX, KC_MINS, KC_EQL,  KC_PLUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR,       KC_RCBR, KC_COLN, LGUI(KC_ENT),
+        KC_LSFT, KC_UNDS, KC_BSLS, KC_PIPE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC,       KC_RBRC, KC_SCLN, _______,
+        KC_MRWD, KC_VOLD, KC_VOLU, KC_MFFD, LAISE,   KC_MPLY,          _______, LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
     ),
     /*  Lower + Raise
      *  -----------------------------------------------------------------------------------------------
@@ -105,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LGUI(KC_0), LGUI(KC_1), LGUI(KC_2), LGUI(KC_3),   LGUI(KC_4), LGUI(KC_5),    LGUI(KC_6),   LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), _______, _______,
         KC_F1,      KC_F2,      KC_F3,      KC_F4,        KC_F5,      KC_F6,         KC_F7,        KC_F8,      KC_F9,      KC_F10,     KC_F11,  KC_F12,
         _______,    _______,    _______,    LCTL(KC_GRV), _______,    LGUI(KC_HASH), LGUI(KC_DLR), _______,    _______,    _______,    _______, _______,
-        _______,    _______,    _______,    _______,      KC_TRNS,    _______,                     KC_TRNS,    _______,    _______,    _______, _______
+        _______,    _______,    _______,    _______,      _______,    _______,                     _______,    _______,    _______,    _______, _______
     )
 };
 
