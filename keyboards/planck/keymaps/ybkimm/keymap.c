@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     /*  Lower
      *  -----------------------------------------------------------------------------------------------
-     * |   `   |   !   |   @   |   #   |   $   |   %   |   ^   |   &   |   *   |   (   |   )   |  ⌘ ⌫  |
+     * |   ~   |   !   |   @   |   #   |   $   |   %   |   ^   |   &   |   *   |   (   |   )   |  ⌘ ⌫  |
      * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
      * |  N/A  |   -   |   =   |   +   |  N/A  |  N/A  |  N/A  |  N/A  |   {   |   }   |   :   |  ⌘ ↩  |
      * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  -----------------------------------------------------------------------------------------------
      */
     [_LOWER] = LAYOUT_planck_1x2uC(
-        KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,       KC_LPRN, KC_RPRN, LGUI(KC_BSPC),
+        KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR,       KC_LPRN, KC_RPRN, LGUI(KC_BSPC),
         XXXXXXX, KC_MINS, KC_EQL,  KC_PLUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR,       KC_RCBR, KC_COLN, LGUI(KC_ENT),
         KC_LSFT, KC_UNDS, KC_BSLS, KC_PIPE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC,       KC_RBRC, KC_SCLN, _______,
         _______, _______, _______, _______, XXXXXXX, KC_SPC,           LAISE,   LGUI(KC_LEFT), KC_PGDN, KC_PGUP, LGUI(KC_RGHT)
