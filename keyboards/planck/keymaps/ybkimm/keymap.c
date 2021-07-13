@@ -17,12 +17,12 @@ enum planck_layers {
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 #define LAISE MO(_LAISE)
-#define STENO_SPC MO(_STENO_SPC)
+#define STENO DF(_STENO)
+#define STNOSPC MO(_STENO_SPC)
+#define STNOEND DF(_BASE)
 
 enum planck_keycodes {
-    KC_ATAB = SAFE_RANGE,   // Actually, CMD TAB.
-    KC_STST,                // Steno Start
-    KC_STEN                 // Steno End
+    KC_ATAB = SAFE_RANGE // Actually, CMD TAB.
 };
 
 #define KC_OPTL LOPT(KC_LEFT)  // ⌥→
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         STN_N1,  STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,  STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC,
         STN_FN,  STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
         XXXXXXX, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
-        KC_STEN, XXXXXXX, XXXXXXX, STN_A,   STN_O,   STENO_SPC,        STN_E,   STN_U,   STN_PWR, STN_RE1, STN_RE2
+        STNOEND, XXXXXXX, XXXXXXX, STN_A,   STN_O,   STNOSPC,          STN_E,   STN_U,   STN_PWR, STN_RE1, STN_RE2
     ),
     /* Steno Special
      *  -----------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LAISE] = LAYOUT_planck_1x2uC(
         G(KC_0), G(KC_1), G(KC_2), G(KC_3),   G(KC_4), G(KC_5),    G(KC_6),   G(KC_7), G(KC_8), G(KC_9), XXXXXXX, XXXXXXX,
         KC_F1,   KC_F2,   KC_F3,   KC_F4,     KC_F5,   KC_F6,      KC_F7,     KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-        XXXXXXX, XXXXXXX, XXXXXXX, C(KC_GRV), XXXXXXX, G(KC_HASH), G(KC_DLR), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_STST,
+        XXXXXXX, XXXXXXX, XXXXXXX, C(KC_GRV), XXXXXXX, G(KC_HASH), G(KC_DLR), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, STENO,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     )
 };
@@ -175,14 +175,15 @@ void keyboard_post_init_user(void) {
 }
 
 bool atab_enabled = false;
+bool steno_enabled = false;
 
 void enable_atab(void) {
-    register_code(KC_G);
+    register_code(KC_LGUI);
     atab_enabled = true;
 }
 
 void disable_atab(void) {
-    unregister_code(KC_G);
+    unregister_code(KC_LGUI);
     atab_enabled = false;
 }
 
@@ -199,26 +200,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
-        case KC_STST:
-            #ifdef STENO_ENABLE
-                #ifdef AUDIO_ENABLE
-                    stop_all_notes();
-                    PLAY_SONG(plover_song);
-                #endif
-                layer_on(_STENO);
-            #endif
-            return false;
-            break;
-        case KC_STEN:
-            #ifdef STENO_ENABLE
-                #ifdef AUDIO_ENABLE
-                    stop_all_notes();
-                    PLAY_SONG(plover_gb_song);
-                #endif
-                layer_off(_STENO);
-            #endif
-            return false;
-            break;
         default:
             if (atab_enabled) {
                 disable_atab();
@@ -226,4 +207,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
     }
     return true;
+}
+
+layer_state_t default_layer_state_set_kb(layer_state_t state) {
+    #ifdef AUDIO_ENABLE
+        if (state == 1UL << _STENO) {
+            stop_all_notes();
+            PLAY_SONG(plover_gb_song);
+            steno_enabled = true;
+        } else if (steno_enabled) {
+            stop_all_notes();
+            PLAY_SONG(plover_gb_song);
+            steno_enabled = false;
+        }
+    #endif
+    return state;
 }
